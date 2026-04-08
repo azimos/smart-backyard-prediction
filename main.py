@@ -3,6 +3,7 @@ from src.transform import load_data
 from src.train_model import train
 from src.predict import predict
 from src.visualization import plot_results
+from src.llm_insights import generate_insights
 
 import pandas as pd
 
@@ -31,6 +32,9 @@ def run_pipeline():
     print("Saving predictions...")
     df_predictions.to_csv("outputs/predictions.csv", index=False)
 
+    # generate human-readable explanations
+    generate_insights(df_predictions, output_file="outputs/insights.txt")
+    
     # 6. Visualize
     print("Generating visualization...")
     plot_results(df_predictions)
